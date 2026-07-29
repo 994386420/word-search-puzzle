@@ -1,0 +1,4 @@
+storePasswordFile=/absolute/path/to/upload-keystore.password
+keyPasswordFile=/absolute/path/to/upload-keystore.password
+keyAlias=upload
+storeFile=/absolute/path/to/upload-keystore.keystore

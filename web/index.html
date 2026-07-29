@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A fast, polished word search puzzle game.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#FFF0B8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#35172F" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Word Search">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Word Search</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    :root {
+      --splash-bg-top: #F9D9CD;
+      --splash-bg-mid: #FFF0B8;
+      --splash-bg-bottom: #DDF1BE;
+      --splash-glow: rgba(255, 255, 255, 0.62);
+    }
+
+    html, body {
+      background: #FFF0B8;
+      margin: 0;
+      min-height: 100%;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --splash-bg-top: #35172F;
+        --splash-bg-mid: #2B142B;
+        --splash-bg-bottom: #1D1026;
+        --splash-glow: rgba(255, 185, 98, 0.22);
+      }
+
+      html, body {
+        background: #35172F;
+      }
+    }
+
+    #app-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 2147483647;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 22%, var(--splash-glow), transparent 34%),
+        radial-gradient(circle at 22% 72%, rgba(17, 207, 232, 0.14), transparent 28%),
+        radial-gradient(circle at 78% 72%, rgba(255, 142, 199, 0.14), transparent 28%),
+        linear-gradient(180deg, var(--splash-bg-top), var(--splash-bg-mid) 52%, var(--splash-bg-bottom));
+      opacity: 1;
+      transition: opacity 240ms ease;
+    }
+
+    #app-splash.hidden {
+      opacity: 0;
+    }
+
+    #app-splash img {
+      width: min(82vw, 360px);
+      height: auto;
+      filter: drop-shadow(0 22px 34px rgba(56, 28, 68, 0.16));
+      animation: splash-float 1500ms ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #app-splash img {
+        filter: drop-shadow(0 24px 42px rgba(0, 0, 0, 0.36));
+      }
+    }
+
+    @keyframes splash-float {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-8px) scale(1.018);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app-splash" aria-hidden="true">
+    <picture>
+      <source srcset="splash/launch_logo_dark.png" media="(prefers-color-scheme: dark)">
+      <img src="splash/launch_logo_light.png" alt="">
+    </picture>
+  </div>
+  <script>
+    (function () {
+      var hidden = false;
+      function hideSplash() {
+        if (hidden) return;
+        hidden = true;
+        var splash = document.getElementById('app-splash');
+        if (!splash) return;
+        splash.classList.add('hidden');
+        window.setTimeout(function () {
+          splash.remove();
+        }, 280);
+      }
+      window.addEventListener('flutter-first-frame', hideSplash);
+      window.setTimeout(hideSplash, 3200);
+    })();
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
