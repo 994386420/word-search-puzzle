@@ -38,4 +38,26 @@ void main() {
     expect(iosProject, contains('InfoPlist.strings in Resources'));
     expect(iosProject, contains('"zh-Hans"'));
   });
+
+  test('iOS declares and localizes its microphone purpose string', () {
+    final iosInfoPlist = File('ios/Runner/Info.plist').readAsStringSync();
+    final iosChineseStrings = File(
+      'ios/Runner/zh-Hans.lproj/InfoPlist.strings',
+    ).readAsStringSync();
+
+    expect(iosInfoPlist, contains('<key>NSMicrophoneUsageDescription</key>'));
+    expect(
+      iosInfoPlist,
+      contains(
+        'Word Search uses microphone access to support audio and '
+        'pronunciation features.',
+      ),
+    );
+    expect(
+      iosChineseStrings,
+      contains(
+        '"NSMicrophoneUsageDescription" = "单词搜索需要使用麦克风，以支持语音和单词发音相关功能。";',
+      ),
+    );
+  });
 }

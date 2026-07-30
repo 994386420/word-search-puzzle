@@ -1,2 +1,3 @@
 "CFBundleDisplayName" = "单词搜索";
 "CFBundleName" = "单词搜索";
+"NSMicrophoneUsageDescription" = "单词搜索需要使用麦克风，以支持语音和单词发音相关功能。";
