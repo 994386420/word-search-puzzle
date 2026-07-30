@@ -12,6 +12,11 @@ void main() {
     expect(androidManifest, contains('android:screenOrientation="portrait"'));
     expect(iosInfoPlist, contains('UIInterfaceOrientationPortrait'));
     expect(iosInfoPlist, isNot(contains('UIInterfaceOrientationLandscape')));
+    expect(
+      iosInfoPlist,
+      contains('<key>UIRequiresFullScreen</key>\n\t<true/>'),
+      reason: 'Portrait-only iPad support must opt out of multitasking',
+    );
   });
 
   test('mobile launchers provide a Simplified Chinese app name', () {
